@@ -7,30 +7,28 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import java.util.Date;
 
+
 @Entity(
     foreignKeys = {
         @ForeignKey(
-            entity = Card.class,
-            childColumns = "marker_id",
-            parentColumns = "card_id",
-            onDelete = ForeignKey.NO_ACTION
-
+            entity = Shoe.class,
+            parentColumns = {"shoe_id,"},
+            childColumns = {"shoe_id"},
+            onDelete = ForeignKey.CASCADE
         )
     }
 )
-public class Shoe {
+public class Round {
 
-  @PrimaryKey(autoGenerate = true)
-  @ColumnInfo(name = "shoe_id")
-
+  @PrimaryKey(autoGenerate = true) // this annotation creates a unique index value on table
+  @ColumnInfo(name = "round_id") // mapping a name to a column (round_id)
   private long id;
 
-  @ColumnInfo(index = true)
   @NonNull
   private Date created = new Date();
 
-  @ColumnInfo(name = "marker_id", index = true)
-  private Long markerId;
+  @ColumnInfo(name = "shoe_id", index = true)
+  private long shoeId;
 
   public long getId() {
     return id;
@@ -49,13 +47,11 @@ public class Shoe {
     this.created = created;
   }
 
-  public Long getMarkerId() {
-    return markerId;
+  public long getShoeId() {
+    return shoeId;
   }
 
-  public void setMarkerId(Long markerId) {
-    this.markerId = markerId;
+  public void setShoeId(long shoeId) {
+    this.shoeId = shoeId;
   }
-
-
 }

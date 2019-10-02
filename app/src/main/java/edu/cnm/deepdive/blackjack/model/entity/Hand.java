@@ -42,12 +42,12 @@ public class Hand {
   @ColumnInfo(index = true)
   private Outcome outcome;
 
-  public long getIt() {
+  public long getId() {
     return id;
   }
 
-  public void setIt(long it) {
-    this.id = it;
+  public void setId(long it) {
+    this.id = id;
   }
 
   @NonNull

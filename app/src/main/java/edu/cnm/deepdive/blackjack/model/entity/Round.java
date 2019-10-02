@@ -12,7 +12,7 @@ import java.util.Date;
     foreignKeys = {
         @ForeignKey(
             entity = Shoe.class,
-            parentColumns = {"shoe_id,"},
+            parentColumns = {"shoe_id"},
             childColumns = {"shoe_id"},
             onDelete = ForeignKey.CASCADE
         )

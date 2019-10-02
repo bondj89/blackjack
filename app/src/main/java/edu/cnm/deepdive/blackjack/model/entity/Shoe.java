@@ -23,7 +23,6 @@ public class Shoe {
 
   @PrimaryKey(autoGenerate = true)
   @ColumnInfo(name = "shoe_id")
-
   private long id;
 
   @ColumnInfo(index = true)

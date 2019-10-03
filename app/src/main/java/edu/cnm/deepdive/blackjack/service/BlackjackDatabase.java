@@ -23,6 +23,9 @@ import java.util.Date;
 public abstract class BlackjackDatabase extends
     RoomDatabase {                                            // room is going to generate code in the annotation process.
 
+  protected BlackjackDatabase() {
+    
+  }
   private static Application applicationContext;
 
   public abstract ShoeDao getShoeDao();

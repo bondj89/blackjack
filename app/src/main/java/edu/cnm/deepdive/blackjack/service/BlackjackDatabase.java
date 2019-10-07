@@ -7,6 +7,8 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverter;
 import androidx.room.TypeConverters;
 import edu.cnm.deepdive.blackjack.model.dao.CardDao;
+import edu.cnm.deepdive.blackjack.model.dao.HandDao;
+import edu.cnm.deepdive.blackjack.model.dao.RoundDao;
 import edu.cnm.deepdive.blackjack.model.dao.ShoeDao;
 import edu.cnm.deepdive.blackjack.model.entity.Card;
 import edu.cnm.deepdive.blackjack.model.entity.Card.Rank;
@@ -18,22 +20,17 @@ import edu.cnm.deepdive.blackjack.model.entity.Shoe;
 import java.util.Date;
 
 @Database(
-    entities = {Card.class, Hand.class, Round.class, Shoe.class}, version = 1, exportSchema = true)
+    entities = {Card.class, Hand.class, Round.class, Shoe.class},
+    version = 1, exportSchema = true
+)
 @TypeConverters(BlackjackDatabase.Converters.class)
-public abstract class BlackjackDatabase extends
-    RoomDatabase {                                            // room is going to generate code in the annotation process.
+public abstract class BlackjackDatabase extends RoomDatabase {
 
-  protected BlackjackDatabase() {
-    
-  }
+  protected BlackjackDatabase() {}
+
   private static Application applicationContext;
 
-  public abstract ShoeDao getShoeDao();
-
-  public abstract CardDao getCardDao();
-
-  public static void setApplicationContext(
-      Application applicationContext) { // this db class in a singleton
+  public static void setApplicationContext(Application applicationContext) {
     BlackjackDatabase.applicationContext = applicationContext;
   }
 
@@ -41,14 +38,21 @@ public abstract class BlackjackDatabase extends
     return InstanceHolder.INSTANCE;
   }
 
+  public abstract ShoeDao getShoeDao();
+
+  public abstract CardDao getCardDao();
+
+  public abstract RoundDao getRoundDao();
+
+  public abstract HandDao getHandDao();
+
   private static class InstanceHolder {
 
-    private static final BlackjackDatabase INSTANCE; // This is not an instance field.
+    private static final BlackjackDatabase INSTANCE;
 
     static {
       INSTANCE =
-          Room.databaseBuilder(applicationContext, BlackjackDatabase.class, "blackjack_db")
-              .build(); // this knows how to build other objects. Database builder
+          Room.databaseBuilder(applicationContext, BlackjackDatabase.class, "blackjack_db").build();
     }
 
   }
@@ -56,7 +60,7 @@ public abstract class BlackjackDatabase extends
   public static class Converters {
 
     @TypeConverter
-    public long dateToLong(Date date) {
+    public Long dateToLong(Date date) {
       return (date != null) ? date.getTime() : null;
     }
 
@@ -78,12 +82,13 @@ public abstract class BlackjackDatabase extends
     @TypeConverter
     public Rank stringToRank(String name) {
       return (name != null) ? Rank.valueOf(name) : null;
-
     }
 
     @TypeConverter
     public Suit stringToSuit(String name) {
       return (name != null) ? Suit.valueOf(name) : null;
     }
+
   }
+
 }

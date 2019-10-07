@@ -105,8 +105,11 @@ public class Card {
     return suit;
   }
 
-  public void setSuit(@NonNull Suit suit) {
-    this.suit = suit;
+  public void setSuit(@NonNull Suit suit) { this.suit = suit; }
+
+  @Override
+  public String toString() {
+    return rank.getSymbol() + suit.getSymbol();
   }
 
   public enum Rank {

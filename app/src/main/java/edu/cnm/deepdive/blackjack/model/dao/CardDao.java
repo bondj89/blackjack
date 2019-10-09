@@ -19,11 +19,10 @@ public interface CardDao {
   @Query("SELECT * FROM Card WHERE shoe_id = :shoeId ORDER BY card_id ASC LIMIT 1")
   Card getTopCardInShoe(long shoeId);
 
-@Update
+  @Update
   int update(Card card);
 
-@Update
-int update(Card...cards);
-
+  @Update
+  int update(Card... cards);
 
 }

@@ -35,10 +35,10 @@ public class Card {
 
   @NonNull
   @ColumnInfo(index = true)
-  private Date updated = new Date();
+  private Date updated  = new Date();
 
   @ColumnInfo(name = "shoe_id", index = true)
-  private Long shoeId; // these id's refer to a record in another table.
+  private Long shoeId;
 
   @ColumnInfo(name = "hand_id", index = true)
   private Long handId;
@@ -105,7 +105,9 @@ public class Card {
     return suit;
   }
 
-  public void setSuit(@NonNull Suit suit) { this.suit = suit; }
+  public void setSuit(@NonNull Suit suit) {
+    this.suit = suit;
+  }
 
   @Override
   public String toString() {
@@ -128,11 +130,13 @@ public class Card {
     QUEEN,
     KING;
 
-    private static final String[] SYMBOLS = {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
+    private static final String[] SYMBOLS =
+        {"A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"};
 
     public String getSymbol() {
-      return SYMBOLS [ordinal()];
+      return SYMBOLS[ordinal()];
     }
+
   }
 
   public enum Suit {
@@ -151,11 +155,11 @@ public class Card {
     public Color getColor() {
       return (ordinal() % 3 == 0) ? Color.BLACK : Color.RED;
     }
+
     public enum Color {
       BLACK, RED;
     }
 
   }
-
 
 }
